@@ -44,7 +44,7 @@ If we close and open the codespaces also still we will have the terraform and aw
 
 How to configure aws to terraform
 
-Providers
+# Providers
 A provider in Terraform is a plugin that enables interaction with an API. This includes cloud providers, SaaS providers, and other APIs. The providers are specified in the Terraform configuration code. They tell Terraform which services it needs to interact with.
 For example, if you want to use Terraform to create a virtual machine on AWS, you would need to use the aws provider. The aws provider provides a set of resources that Terraform can use to create, manage, and destroy virtual machines on AWS.
 Here is an example of how to use the aws provider in a Terraform configuration:
@@ -116,7 +116,7 @@ Provider is a plugin that helps terraform where it has to create the entire proj
 Two popular are multi region architecture and multi cloud architecture
 
 Multi cloud or multi  providers :
-# Multiple Providers
+Multiple Providers
 
 You can use multiple providers in one single terraform project. For example
 1. Create a providers.tf file in the root directory of your Terraform project.
@@ -176,7 +176,7 @@ resource "aws_instance" "example2" {
 
 
 
-Variables
+# Variables
 
 Variables are used to parameterized to pass values 
 We should not hardcode the values in terraform so we will use the variables to pass the values
@@ -197,7 +197,7 @@ How to pass the values to the variables?
 We will write a terraform.tfvars
 
 
-Conditional Expressions
+# Conditional Expressions
 Conditional expressions in Terraform are used to define conditional logic within your configurations. They allow you to make decisions or set values based on conditions. Conditional expressions are typically used to control whether resources are created or configured based on the evaluation of a condition
 The syntax for a conditional expression in Terraform is:
 condition ? true_val : false_val
@@ -216,6 +216,7 @@ In this example, the count attribute of the aws_instance resource uses a conditi
 In resources block we are having more lines for example creating an s3 bucket for dev it should host in a public but in prod it should not host as public
 For these kind of conditions in programming we use if else 
 But in terraform we have conditional operators
+```
 The syntax is      condition ? true_val : false_val
 variable "environment" {
   description = "Environment type"
@@ -246,11 +247,12 @@ resource "aws_security_group" "example" {
     cidr_blocks = var.environment == "production" ? [var.production_subnet_cidr] : [var.development_subnet_cidr]
   }
 }
-
+```
 We will use conditional operator when using multiple environments and in complicated archetieture.
 
 Provider Configuration
 The required_providers block in Terraform is used to declare and specify the required provider configurations for your Terraform module or configuration. It allows you to specify the provider name, source, and version constraints.
+```
 terraform {
   required_providers {
     aws = {
@@ -264,14 +266,14 @@ terraform {
   }
 }
 
+```
 
 
 
 
-
-Built in functions:
+# Built in functions:
 Terraform is an infrastructure as code (IaC) tool that allows you to define and provision infrastructure resources in a declarative manner. Terraform provides a wide range of built-in functions that you can use within your configuration files (usually written in HashiCorp Configuration Language, or HCL) to manipulate and transform data. These functions help you perform various tasks when defining your infrastructure. Here are some commonly used built-in functions in Terraform:
-
+```
 1.	Concat (list1, list2, ...): Combines multiple lists into a single list.
 variable "list1" {
   type    = list
@@ -336,12 +338,13 @@ variable "my_list" {
 output "joined_string" {
   value = join(", ", var.my_list) # Returns "apple, banana, cherry"
 }
+```
 These are just a few examples of the built-in functions available in Terraform. You can find more functions and detailed documentation in the official Terraform documentation, which is regularly updated to include new features and improvements
 
 
 
 
-Modules:
+# Modules:
 
 Modules
 The advantage of using Terraform modules in your infrastructure as code (IaC) projects lies in improved organization, reusability, and maintainability. Here are the key benefits:
@@ -405,7 +408,7 @@ Multiple people try to execute only one person execute at a time.
  We need to maintain the lock somewhere where bcz statefile is not there locally there is a resource in aws called dynamo db
 We can implement the locking mechanism through dynamoDB 
 
-Provisioners
+# Provisioners
 <img width="581" height="536" alt="image" src="https://github.com/user-attachments/assets/047a109c-703a-4ac1-8dbf-d38d95c1493e" />
 
  
@@ -430,7 +433,7 @@ File provisioner: It is used to copy files , suppose we have created a RDS insta
 
 
 
-
+# Terraform Workspaces
 Terraform Workspaces: how to setup terraform workspaces for different environments in the organization
 
 they need different infrastructure for dev stage and prod bcz there will be different requirements for each environments  example 
